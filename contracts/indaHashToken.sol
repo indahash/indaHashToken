@@ -158,10 +158,19 @@ contract ERC20Token is ERC20Interface, Owned {
   
   using SafeMath3 for uint;
 
+  uint public tokensIssuedTotal = 0;
   mapping(address => uint) balances;
   mapping(address => mapping (address => uint)) allowed;
 
   // Functions ------------------------
+
+  /* Total token supply */
+
+  function totalSupply() constant
+    returns (uint)
+  {
+    return tokensIssuedTotal;
+  }
 
   /* Get the account balance for an address */
 
@@ -297,7 +306,6 @@ contract IndaHashToken is ERC20Token {
 
   uint public icoEtherReceived = 0; // Ether actually received by the contract
 
-  uint public tokensIssuedTotal = 0;
   uint public tokensIssuedIco   = 0;
   uint public tokensIssuedMkt   = 0;
   
@@ -398,38 +406,6 @@ contract IndaHashToken is ERC20Token {
      if ( !icoThresholdReached() ) return false;
      if ( atNow() < DATE_ICO_END + COOLDOWN_PERIOD ) return false;
      return true;
-  }
-  
-  /* Crowdsale contribution in Ether */
-
-  function icoEtherContributedOf(address _owner) constant 
-    returns (uint)
-  {
-    return icoEtherContributed[_owner];
-  }
-
-  /* Number of tokens received during crowdsale */  
-  
-  function icoTokensReceivedOf(address _owner) constant 
-    returns (uint)
-  {
-    return icoTokensReceived[_owner];
-  }
-
-  /* Has a refund been claimed? */  
-  
-  function isRefundClaimed(address _owner) constant 
-    returns (bool)
-  {
-    return refundClaimed[_owner];
-  } 
-
-  /* Has the aidrop been claimed? */  
-  
-  function isAirdropClaimed(address _owner) constant 
-    returns (bool)
-  {
-    return airdropClaimed[_owner];
   }
   
   // Owner Functions ------------------
@@ -550,14 +526,6 @@ contract IndaHashToken is ERC20Token {
   }
   
   // ERC20 functions ------------------
-
-  /* Implement totalSupply() ERC20 function */
-  
-  function totalSupply() constant
-    returns (uint)
-  {
-    return tokensIssuedTotal;
-  }
 
   /* Override "transfer" (ERC20) */
 
