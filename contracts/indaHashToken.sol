@@ -241,9 +241,12 @@ contract IndaHashToken is ERC20Token {
   uint public constant TOKEN_SUPPLY_ICO   = 320 * E6 * E6; // 320 mm tokens
   uint public constant TOKEN_SUPPLY_MKT   =  80 * E6 * E6; //  80 mm tokens
 
+  uint public constant PRESALE_ETH_CAP =  10000 ether;
+
   uint public constant MIN_FUNDING_GOAL =  40 * E6 * E6; // 40 mm tokens
   
   uint public constant MIN_CONTRIBUTION = 1 ether / 20; // 0.05 Ether
+  uint public constant MAX_CONTRIBUTION = 300 ether;
 
   uint public constant COOLDOWN_PERIOD =  2 days;
   uint public constant CLAWBACK_PERIOD = 90 days;
@@ -384,13 +387,20 @@ contract IndaHashToken is ERC20Token {
     bool isIco = false;
     uint tokens = 0;
     
+    // minimum contribution
     require( msg.value >= MIN_CONTRIBUTION );
+    
+    // one address transfer hard cap
+    require( icoEtherContributed[msg.sender].add(msg.value) <= MAX_CONTRIBUTION );
 
     // check dates for presale or ICO
     if (ts > DATE_PRESALE_START && ts < DATE_PRESALE_END) isPresale = true;  
     if (ts > DATE_ICO_START && ts < DATE_ICO_END) isIco = true;  
     require( isPresale || isIco );
 
+    // presale cap in Ether
+    if (isPresale) require( icoEtherReceived.add(msg.value) <= PRESALE_ETH_CAP );
+    
     // get baseline number of tokens
     tokens = tokensPerEth.mul(msg.value) / 1 ether;
     
