@@ -239,7 +239,7 @@ contract IndaHashToken is ERC20Token {
   uint public constant TOKEN_SUPPLY_ICO   = 320 * E6 * E6; // 320 mm tokens
   uint public constant TOKEN_SUPPLY_MKT   =  80 * E6 * E6; //  80 mm tokens
 
-  uint public constant PRESALE_ETH_CAP =  1500 ether;
+  uint public constant PRESALE_ETH_CAP =  15000 ether;
 
   uint public constant MIN_FUNDING_GOAL =  40 * E6 * E6; // 40 mm tokens
   
