@@ -243,7 +243,7 @@ contract IndaHashToken is ERC20Token {
 
   uint public constant MIN_FUNDING_GOAL =  40 * E6 * E6; // 40 mm tokens
   
-  uint public constant MIN_CONTRIBUTION = 1 ether / 20; // 0.05 Ether
+  uint public constant MIN_CONTRIBUTION = 1 ether / 2; // 0.5 Ether
   uint public constant MAX_CONTRIBUTION = 300 ether;
 
   uint public constant COOLDOWN_PERIOD =  2 days;
