@@ -583,8 +583,7 @@ contract IndaHashToken is ERC20Token {
     require( locked[msg.sender] == false );
     require( _addresses.length == _amounts.length );
     for (uint i = 0; i < _addresses.length; i++) {
-      require( locked[_addresses[i]] == false ); 
-      super.transfer(_addresses[i], _amounts[i]);
+      if (locked[_addresses[i]] == false) super.transfer(_addresses[i], _amounts[i]);
     }
   }  
 
