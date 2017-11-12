@@ -8,4 +8,4 @@ https://github.com/bokkypoobah/indaHashTokenContractAudit
 
 This contract was deployed at the following address:
 
-https://etherscan.io/address/0x60edbfa1aa26dc07da5fb44f6f2a06e2c74dad41#internaltx
+https://etherscan.io/address/0x5136c98a80811c3f46bdda8b5c4555cfd9f812f0
